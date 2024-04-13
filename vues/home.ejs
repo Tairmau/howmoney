@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/style.css">
+        <title>HOWMONEY - HOME</title>
+    </head>
+    <body>
+        <div class="container-home">
+            <h1>connecté en étant que</h1>
+            <button id="add" onclick="displayForm()">Ajouter une depenses</button>
+
+            <form action="/add" method="POST" id="formAjout">
+                <input type="number" name="number">
+                <input type="date" name="date">
+                <button type="submit">Ajouter</button>
+            </form>
+            <table border="2">
+                <tr>
+                    <th>Date dépense</th>
+                    <th>Argent dépensé</th>
+                    <th>Modifier</th>
+                </tr>
+                <% depenses.forEach(depense => { %>
+                <tr>
+                    <td><%= depense.date_D %></td>
+                    <td><%= depense.argent %></td>
+                    <td><a href="#" onclick="supprimerDepense('<%= depense.id_Depenses %>')">Supprimer</a></td>
+                </tr>
+                <% }); %>
+            </table>            
+        </div>
+    </body>
+</html>
+
+<script>
+
+const btnAjout = document.getElementById('add');
+
+const formAjout = document.getElementById('formAjout');
+
+function displayForm() {
+    
+    if(btnAjout.click){
+        formAjout.style.display = 'block';
+    }
+
+}
+
+</script>
+
+<script>
+    function supprimerDepense(idDepense) {
+        if (confirm("Êtes-vous sûr de vouloir supprimer cette dépense ?")) {
+            fetch('/supprimer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idDepense: idDepense })
+            }).then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url; // Rediriger vers la page d'accueil après la suppression réussie
+                }
+            }).catch(error => {
+                console.error('Erreur lors de la suppression de la dépense :', error);
+            });
+        }
+    }
+    </script>

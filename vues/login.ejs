@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/style.css">
+        <title>HOWMONEY - login</title>
+    </head>
+    <body>
+        <div class="container-login">
+            <form action="/login" method="POST">
+                <h2>CONNEXION</h2>
+
+                <label for="email">Email :</label>
+                <input type="email" id="identifiant" name="identifiant">
+                
+                <label for="mdp">Mot de passe :</label>
+                <input type="password" id="mdp" name="mdp">
+
+                <button type="submit">se connecter</button>        
+                <p>Pas encore enregistrer ? <a href="/register">Inscrivez vous</a></p>        
+            </form>
+        </div>
+    </body>
+</html>
